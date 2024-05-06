@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1052055219490",
+    "project_id": "gem-project-1a89c",
+    "storage_bucket": "gem-project-1a89c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052055219490:android:2186c73b9372f623fec97b",
+        "android_client_info": {
+          "package_name": "com.example.gem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4wAbwmBBQ_9fBF6RrkZ3k_A8ftH4mmVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
