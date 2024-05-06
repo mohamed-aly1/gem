@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class InfoPage extends StatelessWidget {
   final Map<String, dynamic> data;
@@ -36,9 +37,12 @@ class InfoPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(
                   top: 75, left: 15, right: 15, bottom: 25),
-              child: Image.network(
-                data["url"],
-                fit: BoxFit.fill,
+              child: SizedBox(
+                height: 400,
+                child: Image.network(
+                  data["url"],
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
             Expanded(
@@ -91,7 +95,10 @@ class InfoPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.back();
+
+                                },
                                 child: const Text('Scan Another QR')),
                             ElevatedButton(
                                 onPressed: () {}, child: const Text('Share')),

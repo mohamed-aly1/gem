@@ -3,7 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gem/screens/info.dart';
+import 'package:gem/screens/map.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -19,6 +22,7 @@ class QRViewExample extends StatefulWidget {
 class _QRViewExampleState extends State<QRViewExample> {
   Barcode? result;
   QRViewController? controller;
+  Map<String, dynamic>? dataMap;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   @override
@@ -33,61 +37,152 @@ class _QRViewExampleState extends State<QRViewExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: Container(
-              color: const Color(0xFF2B2B28),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  const Text(
-                    'Scan a QR code To Explore !',
-                    style: TextStyle(
-                        color: Color(0xFFE3B04B),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.pauseCamera();
-                          },
-                          child:
-                              const Text('Map', style: TextStyle(fontSize: 20)),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.resumeCamera();
-                          },
-                          child: const Text('resume',
-                              style: TextStyle(fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+        body: BottomBar(
+      barColor: Colors.transparent,
+      child: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          color: const Color(0xFF2B2B28),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[],
             ),
-          )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Color(0xFF2B2B28)),
+                      shadowColor: MaterialStatePropertyAll(Colors.transparent),
+                      overlayColor:
+                          MaterialStatePropertyAll(Colors.transparent),
+                      surfaceTintColor:
+                          MaterialStatePropertyAll(Colors.transparent),
+                    ),
+                    onPressed: () {
+                      Get.to(const MapPage());
+                    },
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/map.svg',
+                          width: 20,
+                        ),
+                        const Text('Map',
+                            style:
+                                TextStyle(fontSize: 10, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Color(0xFFE3B04B)),
+                      shadowColor: MaterialStatePropertyAll(Colors.transparent),
+                      overlayColor:
+                          MaterialStatePropertyAll(Colors.transparent),
+                      surfaceTintColor:
+                          MaterialStatePropertyAll(Colors.transparent),
+                    ),
+                    onPressed: () async {
+                      if (result != null) {
+                        Get.to(() => InfoPage(
+                              data: dataMap!,
+                            ));
+                      } else {
+                        setState(() {
+                          result = null;
+                        });
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          result == null
+                              ? SvgPicture.asset(
+                                  'assets/images/qrCodeHome.svg',
+                                  width: 30,
+                                )
+                              : const Icon(
+                                  Icons.arrow_circle_right_outlined,
+                                  color: Color(0xFF2B2B28),
+                                  size: 20,
+                                ),
+                          Text(result == null ? 'Scan' : "Explore",
+                              style: const TextStyle(
+                                  fontSize: 8,
+                                  color: Color(0xFF2B2B28),
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Color(0xFF2B2B28)),
+                      shadowColor: MaterialStatePropertyAll(Colors.transparent),
+                      overlayColor:
+                          MaterialStatePropertyAll(Colors.transparent),
+                      surfaceTintColor:
+                          MaterialStatePropertyAll(Colors.transparent),
+                    ),
+                    onPressed: () async {},
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/history.svg',
+                          width: 20,
+                        ),
+                        const Text('History',
+                            style:
+                                TextStyle(fontSize: 10, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      body: (context, controller) => Stack(
+        alignment: Alignment.center,
+        children: [
+          Column(
+            children: <Widget>[
+              Expanded(flex: 4, child: _buildQrView(context)),
+            ],
+          ),
+          if (result != null) ...{
+            Text(
+              dataMap!["details"],
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            )
+          }
         ],
       ),
-    );
+    ));
   }
 
   Widget _buildQrView(BuildContext context) {
@@ -100,10 +195,10 @@ class _QRViewExampleState extends State<QRViewExample> {
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
         borderColor: const Color(0xFFE3B04B),
-        borderRadius: 20,
-        borderLength: 30,
-        borderWidth: 30,
-        cutOutSize: scanArea,
+        borderRadius: result == null ? 20 : 0,
+        borderLength: result == null ? 30 : 0,
+        borderWidth: result == null ? 30 : 0,
+        cutOutSize: result == null ? scanArea : 0,
       ),
     );
   }
@@ -115,10 +210,10 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        Map<String, dynamic> dataMap = json.decode(result!.code!);
-        Get.to(() => InfoPage(
-              data: dataMap,
-            ));
+        dataMap = json.decode(result!.code!);
+        // Get.to(() => InfoPage(
+        //       data: dataMap,
+        //     ));
       });
     });
   }
