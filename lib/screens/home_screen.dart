@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gem/screens/qr_page.dart';
 import 'package:gem/screens/sign_in.dart';
@@ -13,17 +15,20 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          SvgPicture.asset(
-            'assets/images/back.svg',
+          Image.asset(
+            'assets/images/backGr.png',
             width: double.infinity,
           ),
-          SvgPicture.asset(
-            'assets/images/gem.svg',
-            width: double.infinity,
+          Opacity(
+            opacity: 0.85,
+            child: SvgPicture.asset(
+              'assets/images/back.svg',
+              width: double.infinity,
+            ),
           ),
-          SvgPicture.asset(
-            'assets/images/home.svg',
-            width: double.infinity,
+          Image.asset(
+            'assets/images/gemLogo.png',
+            width: 300,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 150.0),

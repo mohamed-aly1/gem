@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class InfoPage extends StatelessWidget {
@@ -94,14 +96,80 @@ class InfoPage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            ElevatedButton(
-                                onPressed: () {
+                            Container(
+                              margin: const EdgeInsets.all(8),
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)))),
+                                  padding: MaterialStatePropertyAll(
+                                      EdgeInsets.symmetric(
+                                          vertical: 20, horizontal: 20)),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xFFE3B04B)),
+                                  shadowColor: MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                  overlayColor: MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                  surfaceTintColor: MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                ),
+                                onPressed: () async {
                                   Get.back();
-
                                 },
-                                child: const Text('Scan Another QR')),
-                            ElevatedButton(
-                                onPressed: () {}, child: const Text('Share')),
+                                child: Column(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/qrCode.svg',
+                                      width: 20,
+                                    ),
+                                    const Text('Scan Again',
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color(0xFF2B2B28))),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.all(8),
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)))),
+                                  padding: MaterialStatePropertyAll(
+                                      EdgeInsets.symmetric(
+                                          vertical: 18, horizontal: 30)),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xFFE3B04B)),
+                                  shadowColor: MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                  overlayColor: MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                  surfaceTintColor: MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                ),
+                                onPressed: () async {
+                                  // TODO : Share Logic Here
+                                },
+                                child: Column(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/share.svg',
+                                      width: 20,
+                                    ),
+                                    const Text('Share',
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color(0xFF2B2B28))),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       )
