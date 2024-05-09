@@ -38,43 +38,49 @@ class HomeScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(() => const QRViewExample());
+                    Get.to(() => const SignIn());
                   },
                   style: const ButtonStyle(
                       padding: MaterialStatePropertyAll(
-                          EdgeInsets.symmetric(horizontal: 85, vertical: 10)),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10)),
                       backgroundColor:
                           MaterialStatePropertyAll(Color(0xFF1E1E1E))),
-                  child: const Text(
-                    "Sign In",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
+                  child: const SizedBox(
+                    width: 360,
+                    child: Text(
+                      "Book Tickets",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Don't have an account?",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        )),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Sign Up',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              decoration: TextDecoration.underline,
-                              decorationColor: Colors.white)),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const QRViewExample());
+                  },
+                  style: const ButtonStyle(
+                      padding: MaterialStatePropertyAll(
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10)),
+                      backgroundColor:
+                          MaterialStatePropertyAll(Color(0xFF1E1E1E))),
+                  child: const SizedBox(
+                    width: 360,
+                    child: Text(
+                      "Explore With QR Code",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                  ],
-                )
+                  ),
+                ),
               ],
             ),
           ),

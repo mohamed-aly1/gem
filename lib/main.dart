@@ -1,10 +1,21 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gem/firebase_options.dart';
 import 'package:gem/screens/home_screen.dart';
 import 'package:gem/screens/qr_page.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() {
+late final FirebaseApp app;
+late final FirebaseAuth auth;
+Future<void> main() async {
   runApp(const MyApp());
+  app = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  auth = FirebaseAuth.instanceFor(app: app);
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +27,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(primaryColor: Colors.black),
       home: const HomeScreen(),
     );
   }
