@@ -102,6 +102,12 @@ class _QRViewExampleState extends State<QRViewExample> {
                             Get.to(() => InfoPage(
                                   data: dataMap!,
                                 ));
+                            Future.delayed(const Duration(seconds: 1))
+                                .then((value) {
+                              setState(() {
+                                result = null;
+                              });
+                            });
                           } else {
                             setState(() {
                               result = null;
@@ -288,9 +294,6 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
         dataMap = json.decode(result!.code!);
-        // Get.to(() => InfoPage(
-        //       data: dataMap,
-        //     ));
       });
     });
   }

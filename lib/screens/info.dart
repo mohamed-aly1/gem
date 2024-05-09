@@ -118,6 +118,7 @@ class InfoPage extends StatelessWidget {
                                       Colors.transparent),
                                 ),
                                 onPressed: () async {
+                                  
                                   Get.back();
                                 },
                                 child: Column(
