@@ -15,20 +15,31 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
-            'assets/images/backGr.png',
-            width: double.infinity,
+          SizedBox(
+            width: Get.width,
+            height: Get.height,
+            child: Image.asset(
+              'assets/images/backGr.png',
+              fit: BoxFit.fill,
+            ),
           ),
           Opacity(
             opacity: 0.85,
-            child: SvgPicture.asset(
-              'assets/images/back.svg',
-              width: double.infinity,
+            child: SizedBox(
+              width: Get.width,
+              height: Get.height,
+              child: SvgPicture.asset(
+                'assets/images/back.svg',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-          Image.asset(
-            'assets/images/gemLogo.png',
-            width: 300,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 108.0),
+            child: Image.asset(
+              'assets/images/gemLogo.png',
+              width: 300,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 150.0),

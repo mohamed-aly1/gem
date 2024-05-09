@@ -24,19 +24,27 @@ class SignIn extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
-            'assets/images/backGr.png',
-            width: double.infinity,
+          SizedBox(
+            width: Get.width,
+            height: Get.height,
+            child: Image.asset(
+              'assets/images/backGr.png',
+              fit: BoxFit.fill,
+            ),
           ),
           Opacity(
             opacity: 0.85,
-            child: SvgPicture.asset(
-              'assets/images/back.svg',
-              width: double.infinity,
+            child: SizedBox(
+              width: Get.width,
+              height: Get.height,
+              child: SvgPicture.asset(
+                'assets/images/back.svg',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 200.0),
+            padding: const EdgeInsets.only(top: 170.0),
             child: Align(
               alignment: Alignment.topCenter,
               child: Image.asset(

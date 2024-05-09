@@ -14,6 +14,8 @@ class Signup extends StatelessWidget {
 
   GlobalKey<FormState> formk = new GlobalKey<FormState>();
 
+  Signup({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,19 +23,27 @@ class Signup extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-            Image.asset(
-              'assets/images/backGr.png',
-              width: double.infinity,
+            SizedBox(
+              width: Get.width,
+              height: Get.height,
+              child: Image.asset(
+                'assets/images/backGr.png',
+                fit: BoxFit.fill,
+              ),
             ),
             Opacity(
               opacity: 0.85,
-              child: SvgPicture.asset(
-                'assets/images/back.svg',
-                width: double.infinity,
+              child: SizedBox(
+                width: Get.width,
+                height: Get.height,
+                child: SvgPicture.asset(
+                  'assets/images/back.svg',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(top: 25.0),
               child: Center(
                   child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
@@ -44,16 +54,6 @@ class Signup extends StatelessWidget {
                         width: 180,
                         height: 180,
                         child: Image.asset("assets/images/gemLogo.png"),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Sign Up",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                       Form(
                         key: formk,
