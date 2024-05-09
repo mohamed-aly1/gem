@@ -49,7 +49,8 @@ class InfoPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
+              child: 
+              Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
@@ -57,7 +58,8 @@ class InfoPage extends StatelessWidget {
                   ),
                   color: Color(0xFF2B2B28),
                 ),
-                child: Column(
+                child: 
+                Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
