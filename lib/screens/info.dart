@@ -38,12 +38,13 @@ class InfoPage extends StatelessWidget {
           Column(children: [
             Padding(
               padding: const EdgeInsets.only(
-                  top: 75, left: 15, right: 15, bottom: 25),
+                  top: 70, left: 15, right: 15, bottom: 25),
               child: SizedBox(
-                height: 400,
+                height: 200,
+                width: 200,
                 child: Image.network(
                   data["url"],
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
