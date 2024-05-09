@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,226 +39,249 @@ class _QRViewExampleState extends State<QRViewExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          BottomBar(
-            barColor: Colors.transparent,
-            child: Container(
-              height: 80,
-              decoration: BoxDecoration(
-                color: const Color(0xFF2B2B28),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Color(0xFF2B2B28)),
-                            shadowColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            overlayColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            surfaceTintColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                          ),
-                          onPressed: () {
-                            Get.to(const MapPage());
-                          },
-                          child: Column(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/map.svg',
-                                width: 20,
-                              ),
-                              const Text('Map',
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white)),
-                            ],
-                          ),
+        body: Stack(
+      children: [
+        BottomBar(
+          barColor: Colors.transparent,
+          child: Container(
+            height: 80,
+            decoration: BoxDecoration(
+              color: const Color(0xFF2B2B28),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xFF2B2B28)),
+                          shadowColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          overlayColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          surfaceTintColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                        ),
+                        onPressed: () {
+                          Get.to(const MapPage());
+                        },
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/map.svg',
+                              width: 20,
+                            ),
+                            const Text('Map',
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white)),
+                          ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Color(0xFFE3B04B)),
-                            shadowColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            overlayColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            surfaceTintColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                          ),
-                          onPressed: () async {
-                            if (result != null) {
-                              Get.to(() => InfoPage(
-                                    data: dataMap!,
-                                  ));
-                              Future.delayed(const Duration(seconds: 1))
-                                  .then((value) {
-                                setState(() {
-                                  result = null;
-                                });
-                              });
-                            } else {
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xFFE3B04B)),
+                          shadowColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          overlayColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          surfaceTintColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                        ),
+                        onPressed: () async {
+                          if (result != null) {
+                            Get.to(() => InfoPage(
+                                  data: dataMap!,
+                                ));
+                            Future.delayed(const Duration(seconds: 1))
+                                .then((value) {
                               setState(() {
                                 result = null;
                               });
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                result == null
-                                    ? SvgPicture.asset(
-                                        'assets/images/qrCodeHome.svg',
-                                        width: 30,
-                                      )
-                                    : const Icon(
-                                        Icons.arrow_circle_right_outlined,
-                                        color: Color(0xFF2B2B28),
-                                        size: 20,
-                                      ),
-                                Text(result == null ? 'Scan' : "Explore",
-                                    style: const TextStyle(
-                                        fontSize: 8,
-                                        color: Color(0xFF2B2B28),
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Color(0xFF2B2B28)),
-                            shadowColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            overlayColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            surfaceTintColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                          ),
-                          onPressed: () async {},
+                            });
+                          } else {
+                            setState(() {
+                              result = null;
+                            });
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                              SvgPicture.asset(
-                                'assets/images/history.svg',
-                                width: 20,
-                              ),
-                              const Text('History',
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white)),
+                              result == null
+                                  ? SvgPicture.asset(
+                                      'assets/images/qrCodeHome.svg',
+                                      width: 30,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_circle_right_outlined,
+                                      color: Color(0xFF2B2B28),
+                                      size: 20,
+                                    ),
+                              Text(result == null ? 'Scan' : "Explore",
+                                  style: const TextStyle(
+                                      fontSize: 8,
+                                      color: Color(0xFF2B2B28),
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            body: (context, controller) => Stack(
-              alignment: Alignment.center,
-              children: [
-                Column(
-                  children: <Widget>[
-                    Expanded(flex: 4, child: _buildQrView(context)),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xFF2B2B28)),
+                          shadowColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          overlayColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          surfaceTintColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                        ),
+                        onPressed: () async {},
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/history.svg',
+                              width: 20,
+                            ),
+                            const Text('History',
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white)),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 75.0, horizontal: 45),
-            child: Container(
-              height: 80,
-              decoration: BoxDecoration(
-                color: const Color(0xFF2B2B28),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          body: (context, controller) => Stack(
+            alignment: Alignment.center,
+            children: [
+              Column(
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Color(0xFF2B2B28)),
-                            shadowColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            overlayColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            surfaceTintColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                          ),
-                          onPressed: () {
-                            Get.back();
-                          },
-                          child: const Column(
-                            children: [
-                              Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
+                  Expanded(flex: 4, child: _buildQrView(context)),
+                ],
+              ),
+              if (result != null) ...{
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        dataMap!["name"],
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Color(0xFF2B2B28)),
-                            shadowColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            overlayColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            surfaceTintColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                          ),
-                          onPressed: () async {},
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                  width: 30,
-                                  height: 30,
-                                  child: Image.asset(
-                                    "assets/images/Ticket.png",
-                                    color: Colors.white,
-                                  ))
-                            ],
-                          ),
-                        ),
+                      Text(
+                        dataMap!["details"],
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20),
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              }
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 75.0, horizontal: 45),
+          child: Container(
+            height: 80,
+            decoration: BoxDecoration(
+              color: const Color(0xFF2B2B28),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xFF2B2B28)),
+                          shadowColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          overlayColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          surfaceTintColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                        ),
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Column(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xFF2B2B28)),
+                          shadowColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          overlayColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          surfaceTintColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                        ),
+                        onPressed: () async {},
+                        child: Column(
+                          children: [
+                            SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: Image.asset(
+                                  "assets/images/Ticket.png",
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ));
   }
 
   Widget _buildQrView(BuildContext context) {
@@ -286,159 +310,6 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
         dataMap = json.decode(result!.code!);
-
-        showModalBottomSheet(
-          backgroundColor: const Color(0xFF2B2B28),
-          showDragHandle: true,
-          context: context,
-          builder: (context) => Container(
-            height: Get.height / 2,
-            width: Get.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
-                  ),
-                  color: Color(0xFF2B2B28),
-                ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              dataMap!["name"],
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              dataMap!["details"],
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                              ),
-                              maxLines: 100,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 30.0, left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(8),
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                  shape: MaterialStatePropertyAll(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)))),
-                                  padding: MaterialStatePropertyAll(
-                                      EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 20)),
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      Color(0xFFE3B04B)),
-                                  shadowColor: MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                  overlayColor: MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                  surfaceTintColor: MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                ),
-                                onPressed: () async {
-                                  Get.back();
-                                  result = null;
-                                },
-                                child: Column(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/qrCode.svg',
-                                      width: 20,
-                                    ),
-                                    const Text('Scan Again',
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            color: Color(0xFF2B2B28))),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.all(8),
-                              child: ElevatedButton(
-                                style: const ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      Color(0xFFE3B04B)),
-                                  shadowColor: MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                  overlayColor: MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                  surfaceTintColor: MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                ),
-                                onPressed: () async {
-                                  if (result != null) {
-                                    Get.back();
-                                    Get.to(() => InfoPage(
-                                          data: dataMap!,
-                                        ));
-                                    Future.delayed(const Duration(seconds: 1))
-                                        .then((value) {
-                                      setState(() {
-                                        result = null;
-                                      });
-                                    });
-                                  }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      const Icon(
-                                        Icons.arrow_circle_right_outlined,
-                                        color: Color(0xFF2B2B28),
-                                        size: 20,
-                                      ),
-                                      Text("Explore",
-                                          style: const TextStyle(
-                                              fontSize: 8,
-                                              color: Color(0xFF2B2B28),
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ]),
-              ),
-            ),
-          ),
-        );
       });
     });
   }
