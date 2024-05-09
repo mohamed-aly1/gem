@@ -20,6 +20,7 @@ class SignIn extends StatelessWidget {
     GlobalKey<FormState> formk = new GlobalKey<FormState>();
     final AuthController c = Get.put(AuthController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         alignment: Alignment.center,
         children: [
